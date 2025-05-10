@@ -1,0 +1,41 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.exemplo.grpc";
+option java_outer_classname = "MeteorologiaProto";
+
+service ServicoMeteorologia {
+  rpc ObterTemperaturaAtual (CidadeRequest) returns (TemperaturaResponse);
+  rpc PrevisaoCincoDias (CidadeRequest) returns (PrevisaoResponse);
+  rpc ListarCidades (Empty) returns (ListaCidadesResponse);
+  rpc CadastrarCidade (CidadeRequest) returns (CadastroResponse);
+  rpc EstatisticasClimaticas (CidadeRequest) returns (EstatisticasResponse);
+}
+
+message Empty {}
+
+message CidadeRequest {
+  string nome = 1;
+}
+
+message TemperaturaResponse {
+  float temperatura = 1;
+}
+
+message PrevisaoResponse {
+  repeated float temperaturas = 1;
+}
+
+message ListaCidadesResponse {
+  repeated string cidades = 1;
+}
+
+message CadastroResponse {
+  string mensagem = 1;
+}
+
+message EstatisticasResponse {
+  float media = 1;
+  float minima = 2;
+  float maxima = 3;
+}
