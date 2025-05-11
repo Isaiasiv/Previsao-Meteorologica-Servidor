@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package weather;
+
+// Serviço principal
+service WeatherService {
+  rpc CadastrarCidade(CidadeRequest) returns (MensagemResponse);
+  rpc ListarCidades(Empty) returns (CidadeListResponse);
+  rpc ObterTemperaturaAtual(CidadeRequest) returns (TemperaturaResponse);
+  rpc ObterPrevisao5Dias(CidadeRequest) returns (PrevisaoResponse);
+  rpc ObterEstatisticas(CidadeRequest) returns (EstatisticasResponse);
+}
+
+// Mensagens de requisição
+message CidadeRequest {
+  string nome = 1;
+}
+
+// Mensagens de resposta
+message MensagemResponse {
+  string mensagem = 1;
+}
+
+message CidadeListResponse {
+  repeated string cidades = 1;
+}
+
+message TemperaturaResponse {
+  string cidade = 1;
+  float temperatura = 2;
+}
+
+message PrevisaoResponse {
+  string cidade = 1;
+  repeated float temperaturas = 2;
+}
+
+message EstatisticasResponse {
+  string cidade = 1;
+  float media = 2;
+  float minima = 3;
+  float maxima = 4;
+}
+
+// Mensagem “vazia”
+message Empty {}
